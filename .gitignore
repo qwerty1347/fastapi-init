@@ -1,8 +1,7 @@
 __pycache__/
 .env
-.env.backup
 .venv
 /.docker/mysql/data
 /.docker/mongo/data
+/.docker/redis/data
 /storage/logs
-/storage/uploads/ocr

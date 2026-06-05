@@ -34,21 +34,31 @@ def is_allowed_extension(file_name: str, allowed_extension) -> bool:
     return file_extension in allowed_extension
 
 
-async def save_file(file: UploadFile) -> Path:
+def ensure_directory(dir_path: Path) -> None:
+    """
+    지정된 경로 디렉토리가 존재하지 않으면 디렉토리를 생성합니다.
+
+    Args:
+        dir_path (Path): 디렉터리 경로.
+    """
+    if not dir_path.exists():
+        dir_path.mkdir(parents=True, exist_ok=True)
+
+
+async def save_file(file: UploadFile, upload_dir: Path) -> Path:
     """
     주어진 업로드 파일을 저장하는 함수
 
     매개변수:
     - file (UploadFile): 저장할 업로드 파일
-
+    - upload_dir (Path): 파일을 저장할 디렉토리 경로
     반환값:
     - Path: 저장된 파일의 경로
     """
-    upload_dir = Path(config.STORAGE_PATH) / "uploads" / "ocr"
     file_name = f"{int(time.time())}.{get_file_extension(file.filename)}"
     file_path = upload_dir / file_name
 
-    upload_dir.mkdir(parents=True, exist_ok=True)
+    ensure_directory(upload_dir)
 
     with file_path.open('wb') as f:
         content = await file.read()
