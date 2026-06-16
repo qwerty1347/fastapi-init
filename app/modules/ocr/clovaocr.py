@@ -7,7 +7,7 @@ from fastapi import UploadFile
 from app.core.config import config
 from app.core.utils.file import get_file_extension
 from app.core.utils.http_client import http_post
-from app.module.ocr.base import BaseEngine
+from app.modules.ocr.base import BaseEngine
 
 
 class ClovaOcr(BaseEngine):
@@ -17,7 +17,8 @@ class ClovaOcr(BaseEngine):
 
     async def recognize(self, file: UploadFile):
         post_url, files, headers = await self.build_form_data(file)
-        ocr_result = await http_post(post_url, files=files, headers=headers)
+        response = await http_post(post_url, files=files, headers=headers)
+        ocr_result = response.json()
         return self.parse_inferText(ocr_result)
 
 

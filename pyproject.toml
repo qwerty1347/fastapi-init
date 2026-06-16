@@ -25,6 +25,9 @@ dependencies = [
     "notebook==7.5.5",                  # Jupyter Notebook 서버 (notebooks/ 디렉터리 사용)
     "ipywidgets==8.1.8",                # Jupyter 위젯 지원 (tqdm progress bar, interactive UI 등)
 
+    # HTTP client
+    "httpx",                            # 비동기 HTTP 클라이언트 (외부 API 호출용)
+
     # Dev utils
     "python-dotenv",                    # .env 파일 로더
 ]
