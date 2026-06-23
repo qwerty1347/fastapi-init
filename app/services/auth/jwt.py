@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from http import HTTPStatus
-from fastapi import HTTPException
+from fastapi import HTTPException, status
 from jose import jwt
 
 from app.core.config import config
@@ -45,6 +44,6 @@ class JwtService:
         subject = payload.get('sub')
 
         if subject != config.JWT_SUBJECT:
-            raise HTTPException(status_code=HTTPStatus.UNAUTHORIZED, detail="Invalid token")
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
 
         return True

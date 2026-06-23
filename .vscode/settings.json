@@ -1,9 +1,17 @@
 {
-  "jupyter.notebookFileRoot": "${workspaceFolder}",
-  "python.analysis.extraPaths": [
-      "${workspaceFolder}"
-  ],
-  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
-  "python.analysis.indexing": true,
-  "python.analysis.autoImportCompletions": true,
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+    "python.analysis.indexing": true,
+    "python.analysis.autoImportCompletions": true,
+
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+
+    "jupyter.notebookFileRoot": "${workspaceFolder}",
+
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}"
+    ]
 }

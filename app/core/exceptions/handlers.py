@@ -1,5 +1,4 @@
-from http import HTTPStatus
-from fastapi import HTTPException, Request
+from fastapi import HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from jose import JWTError
@@ -11,7 +10,7 @@ from app.core.utils.response import error_response
 
 async def global_exception_handler(request: Request, exc: Exception) -> JSONResponse:
     return error_response(
-        code=HTTPStatus.INTERNAL_SERVER_ERROR,
+        code=status.HTTP_500_INTERNAL_SERVER_ERROR,
         message=str(exc)
     )
 
@@ -25,7 +24,7 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException) 
 
 async def validation_exception_handler(request: Request, exc: HTTPException) -> JSONResponse:
     return error_response(
-        code=HTTPStatus.UNPROCESSABLE_ENTITY,
+        code=status.HTTP_422_UNPROCESSABLE_ENTITY,
         message="Validation Error",
         errors=[
             {
@@ -39,7 +38,7 @@ async def validation_exception_handler(request: Request, exc: HTTPException) -> 
 
 async def jwt_exception_handler(request: Request, exc: JWTError):
     return error_response(
-        code=HTTPStatus.UNAUTHORIZED,
+        code=status.HTTP_401_UNAUTHORIZED,
         message="Could not validate credentials"
     )
 
